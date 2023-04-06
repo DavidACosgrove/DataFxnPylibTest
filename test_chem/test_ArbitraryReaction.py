@@ -94,6 +94,8 @@ class ScriptTest(TestCase):
         self.assertEqual(prods.count(None), 1)
         self.assertEqual(Chem.MolToSmiles(prods[0]), 'CCC=O.O[C@@H](F)Cl')
         self.assertIsNone(prods[1])
+        rh = prods[0].GetProp('Renderer_Highlight')
+        self.assertEqual('COLOR #ff0000', rh[:13])
 
     def test_bad_phenols(self) -> None:
         # MolFile query
