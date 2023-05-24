@@ -166,9 +166,9 @@ class TestLinkers(unittest.TestCase):
 
     def test_different_phenyls(self) -> None:
         # There was a time when these different environments for the
-        # pbenyl linker gave different SMILES strings due to the
+        # phenyl linker gave different SMILES strings due to the
         # dummies being left with aromatic state.
-        smis = ['C1CCC(CC1)c1ccc(cc1)C1CCCCC1', 'c1ncccc1c1ccc(cc1)C1CCCCC1',
+        smis = ['c1cc(C2CCCCC2)ccc1C1CCCCC1', 'c1ncccc1c1ccc(cc1)C1CCCCC1',
                 'c1ncccc1c1ccc(cc1)c1cccnc1']
         for i, smi in enumerate(smis):
             mol = Chem.MolFromSmiles(smi)
