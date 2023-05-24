@@ -10,6 +10,7 @@ from rdkit import Chem
 from df.RGroupReplacement import RGroupReplacement
 
 from rdkit import RDLogger
+
 RDLogger.DisableLog('rdApp.*')
 
 
@@ -61,7 +62,7 @@ def analogues_in_parents(parents, parent_ids, analogues) -> list[str]:
 
 # columns used in the output table.  So that when they are moved around
 # or added to in the DataFxn code, there's only one place they need
-#changing in the tests.
+# changing in the tests.
 PAR_COL = 0
 PAR_IDS_COL = 1
 MOLS_COL = 2
@@ -93,7 +94,7 @@ class ScriptTest(TestCase):
         for par_id in response.outputTables[0].columns[1].values:
             parent_counts[par_id] += 1
         for i in range(9):
-            self.assertEqual(parent_counts[f'Mol{i+1}'], response.outputColumns[0].values[i])
+            self.assertEqual(parent_counts[f'Mol{i + 1}'], response.outputColumns[0].values[i])
         self.assertEqual(Chem.MolToSmiles(mols[0]), 'Cc1ccccc1Cl')
         self.assertEqual(Chem.MolToSmiles(mols[-1]), 'COc1ccc(C)c(OC)n1')
         self.assertLess(calc_core_rmses(mols), 0.005)
@@ -139,7 +140,7 @@ class ScriptTest(TestCase):
         for par_id in response.outputTables[0].columns[1].values:
             parent_counts[par_id] += 1
         for i in range(9):
-            self.assertEqual(parent_counts[f'Mol{i+1}'], response.outputColumns[0].values[i])
+            self.assertEqual(parent_counts[f'Mol{i + 1}'], response.outputColumns[0].values[i])
         self.assertEqual(Chem.MolToSmiles(mols[0]), 'Cc1ccccc1F')
         self.assertEqual(Chem.MolToSmiles(mols[-1]), 'Cc1ccc(O)nc1S(=O)(=O)N(C)C')
         self.assertLess(calc_core_rmses(mols), 0.005)
@@ -183,7 +184,7 @@ class ScriptTest(TestCase):
         for par_id in response.outputTables[0].columns[1].values:
             parent_counts[par_id] += 1
         for i in range(9):
-            self.assertEqual(parent_counts[f'Mol{i+1}'], response.outputColumns[0].values[i])
+            self.assertEqual(parent_counts[f'Mol{i + 1}'], response.outputColumns[0].values[i])
         self.assertEqual(Chem.MolToSmiles(mols[0]), 'Cc1ccccc1Cl')
         self.assertEqual(Chem.MolToSmiles(mols[-1]), 'Cc1ccc(O)nc1S(=O)(=O)N(C)C')
         self.assertLess(calc_core_rmses(mols), 0.005)
@@ -288,6 +289,16 @@ class ScriptTest(TestCase):
         rgr = RGroupReplacement()
         response = run_script(file_in, rgr)
         self.assertTrue(response)
+
+    def test_extra_map_num(self) -> None:
+        # The R Groups now have a map number as well as an isotope
+        # number.
+        file_in = Path(__file__).parent / 'resources' / 'test_r_group_replacement4.json'
+        rgr = RGroupReplacement()
+        response = run_script(file_in, rgr)
+        self.assertTrue(response)
+        mols = column_to_molecules(response.outputTables[0].columns[MOLS_COL])
+        print(f'number of mols : {len(mols)}')
 
 
 if __name__ == '__main__':
