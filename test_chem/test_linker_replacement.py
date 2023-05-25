@@ -200,30 +200,29 @@ class ScriptTest(TestCase):
             self.assertEqual(count, par_counts[smi])
 
     def test_different_number_linkers(self) -> None:
+        # The test mols have 1, 2 and 3 linkers respectively.
         file_in = Path(__file__).parent / 'resources' / 'test_linker_replacement2.json'
         lr = LinkerReplacements()
         response = run_script(file_in, lr)
         self.assertTrue(response)
         self.assertEqual(1, len(response.outputTables))
         self.assertEqual(6, len(response.outputTables[0].columns))
-        self.assertEqual(219, len(response.outputTables[0].columns[2].values))
         parent_smis = response.outputTables[0].columns[0].values
         parent_ids = response.outputTables[0].columns[1].values
         linker_smis1 = response.outputTables[0].columns[3].values
         linker_smis2 = response.outputTables[0].columns[4].values
         linker_smis3 = response.outputTables[0].columns[5].values
-        self.assertEqual(219, len(parent_smis))
-        self.assertEqual(219, len(parent_ids))
-        self.assertEqual(219, len(linker_smis1))
-        self.assertEqual(219, sum([(ls is not None and len(ls) > 0) for ls in linker_smis1]))
-        self.assertEqual(219, len(linker_smis2))
-        self.assertEqual(200, sum([(ls is not None and len(ls) > 0) for ls in linker_smis2]))
-        self.assertEqual(219, len(linker_smis3))
-        self.assertEqual(100, sum([(ls is not None and len(ls) > 0) for ls in linker_smis3]))
-        exp_par_counts = [19, 100, 100]
-        exp_par_smiles = ['c1ccc(Sc2ccccc2)cc1',
-                          'O=C(Nc1cccc(Sc2ccccc2)c1)c1cccc(OC(=O)c2ccccc2)c1',
-                          'O=C(c1ccccc1)c1cccc(Cc2ccccc2)c1']
+        self.assertEqual(8705, len(parent_smis))
+        self.assertEqual(8705, len(parent_ids))
+        self.assertEqual(8705, len(linker_smis1))
+        self.assertEqual(8705, sum([(ls is not None and len(ls) > 0) for ls in linker_smis1]))
+        self.assertEqual(8705, len(linker_smis2))
+        self.assertEqual(8500, sum([(ls is not None and len(ls) > 0) for ls in linker_smis2]))
+        self.assertEqual(8705, len(linker_smis3))
+        self.assertEqual(129, sum([(ls is not None and len(ls) > 0) for ls in linker_smis3]))
+        exp_par_counts = [205, 8371, 129]
+        exp_par_smiles = ['Cc1ccc(C(=O)Nc2ccccc2)cc1', 'Brc1cccc(Nc2ncnc3ccncc23)c1NCCN1CCOCC1',
+                          'O=C(Cc1cccnc1)OCc1ccc(OC(=O)Oc2c[nH]c(C(=S)c3ccoc3)c2)cc1']
         par_counts = defaultdict(int)
         for ps in parent_smis:
             par_counts[ps] += 1
@@ -231,8 +230,12 @@ class ScriptTest(TestCase):
             self.assertEqual(count, par_counts[smi])
         self.assertEqual('Mol1', parent_ids[0])
         self.assertEqual('Mol3', parent_ids[-1])
-        # It's not possible to check any other output values due to the
-        # random sampling of the truncated sets.
+        exp_val_file = str(file_in).replace('2.json', '_exp_values.txt')
+        with open(exp_val_file, 'r') as f:
+            for fs, ls1, ls2, ls3, ev in zip(response.outputTables[0].columns[2].values,
+                                             linker_smis1, linker_smis2, linker_smis3, f):
+                these_vals = f'{fs} {ls1}.{ls2}.{ls3}'
+                self.assertEqual(ev.strip(), these_vals)
 
     def test_max_output_mols(self) -> None:
         file_in = Path(__file__).parent / 'resources' / 'test_linker_replacement1.json'
@@ -243,6 +246,18 @@ class ScriptTest(TestCase):
         request_json = json.dumps(request_dict)
         lr = LinkerReplacements()
         self.assertRaises(ValueError, run_json, request_json, lr)
+
+    def test_bad_column(self) -> None:
+        # Originally, this failed as the Core column has missing molecules.
+        # It also put out lots of error messages
+        # "Incomplete atom labelling, cannot make bond"
+        # due to the core having map numbers.
+        file_in = Path(__file__).parent / 'resources' / 'test_linker_replacement3.json'
+        with open(file_in, 'r') as fh:
+            request_json = fh.read()
+        lr = LinkerReplacements()
+        response = run_json(request_json, lr)
+        self.assertTrue(response)
 
 
 if __name__ == '__main__':
