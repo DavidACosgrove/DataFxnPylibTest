@@ -54,6 +54,13 @@
       "contentType": null,
       "selectorType": null,
       "data": 100
+    },
+    "totalOutputMols": {
+      "id": "totalOutputMols",
+      "dataType": "integer",
+      "contentType": null,
+      "selectorType": null,
+      "data": 500000
     }
   },
   "maximumOutputColumns": 1,
