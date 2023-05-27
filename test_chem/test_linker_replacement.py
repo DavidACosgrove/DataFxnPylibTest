@@ -230,12 +230,39 @@ class ScriptTest(TestCase):
             self.assertEqual(count, par_counts[smi])
         self.assertEqual('Mol1', parent_ids[0])
         self.assertEqual('Mol3', parent_ids[-1])
+
+        # Pull out the expected values
         exp_val_file = str(file_in).replace('2.json', '_exp_values.txt')
+        exp_vals = []
+        exp_smis = []
+        exp_linkers = []
         with open(exp_val_file, 'r') as f:
-            for fs, ls1, ls2, ls3, ev in zip(response.outputTables[0].columns[2].values,
-                                             linker_smis1, linker_smis2, linker_smis3, f):
-                these_vals = f'{fs} {ls1}.{ls2}.{ls3}'
-                self.assertEqual(ev.strip(), these_vals)
+            for ev in f:
+                exp_vals.append(ev.strip())
+                smi, linkers = ev.strip().split()
+                exp_smis.append(smi)
+                lbits = linkers.split('.')
+                linkers = '.'.join(sorted(lbits)).strip('.')
+                exp_linkers.append(linkers)
+
+        # and the actual ones
+        act_vals = []
+        act_smis = []
+        act_linkers = []
+        for fs, ls1, ls2, ls3 in zip(response.outputTables[0].columns[2].values,
+                                     linker_smis1, linker_smis2, linker_smis3):
+            linkers = '.'.join(sorted([ls1, ls2, ls3])).strip('.')
+            these_vals = f'{fs} {linkers}'
+            act_vals.append(these_vals)
+            act_smis.append(fs)
+            act_linkers.append(linkers)
+
+        # assertCountEqual is misleadingly named:
+        # "Test that sequence first contains the same elements as
+        # second, regardless of their order."
+        self.assertCountEqual(exp_vals, act_vals)
+        self.assertCountEqual(exp_smis, act_smis)
+        self.assertCountEqual(exp_linkers, act_linkers)
 
     def test_max_output_mols(self) -> None:
         file_in = Path(__file__).parent / 'resources' / 'test_linker_replacement1.json'

@@ -1,131 +1,131 @@
 {
-    "executorId": 0,
-    "id": "42f19489-9122-4183-9e37-76daddcabb65",
-    "dataFxnDefId": "0ec811ce-ed71-b514-48ab-488f8d577d0a",
-    "serviceName": "LinkerReplacements",
-    "assembly": null,
-    "tableId": "87559b96-5a73-4666-b570-409deb2ba74c",
-    "inputFields": {
-        "structureColumn": {
-            "id": "structureColumn",
-            "dataType": "string",
-            "contentType": null,
-            "selectorType": "column",
-            "data": "87559b96-5a73-4666-b570-409deb2ba74csSMILES"
-        },
-        "idColumn": {
-            "id": "idColumn",
-            "dataType": "string",
-            "contentType": null,
-            "selectorType": "column",
-            "data": "87559b96-5a73-4666-b570-409deb2ba74csName"
-        },
-        "plusDeltaBonds": {
-            "id": "plusDeltaBonds",
-            "dataType": "integer",
-            "contentType": null,
-            "selectorType": null,
-            "data": -1
-        },
-        "minusDeltaBonds": {
-            "id": "minusDeltaBonds",
-            "dataType": "integer",
-            "contentType": null,
-            "selectorType": null,
-            "data": -1
-        },
-        "matchHbonds": {
-            "id": "matchHbonds",
-            "dataType": "boolean",
-            "contentType": null,
-            "selectorType": null,
-            "data": false
-        },
-        "noRingLinkers": {
-            "id": "noRingLinkers",
-            "dataType": "boolean",
-            "contentType": null,
-            "selectorType": null,
-            "data": false
-        },
-        "maxMolsPerInput": {
-            "id": "maxMolsPerInput",
-            "dataType": "integer",
-            "contentType": null,
-            "selectorType": null,
-            "data": 10000
-        },
-        "totalOutputMols": {
-            "id": "totalOutputMols",
-            "dataType": "integer",
-            "contentType": null,
-            "selectorType": null,
-            "data": 500000
-        }
+  "executorId": 0,
+  "id": "42f19489-9122-4183-9e37-76daddcabb65",
+  "dataFxnDefId": "0ec811ce-ed71-b514-48ab-488f8d577d0a",
+  "serviceName": "LinkerReplacements",
+  "assembly": null,
+  "tableId": "87559b96-5a73-4666-b570-409deb2ba74c",
+  "inputFields": {
+    "structureColumn": {
+      "id": "structureColumn",
+      "dataType": "string",
+      "contentType": null,
+      "selectorType": "column",
+      "data": "87559b96-5a73-4666-b570-409deb2ba74csSMILES"
     },
-    "maximumOutputColumns": 1,
-    "maximumOutputTables": 1,
-    "resultTables": null,
-    "serviceUri": "glysade.python",
-    "inputColumns": {
-        "87559b96-5a73-4666-b570-409deb2ba74csSMILES": {
-            "dataType": "string",
-            "name": "SMILES",
-            "contentType": "chemical/x-daylight-smiles",
-            "properties": {
-                "Name": "SMILES",
-                "ColumnType": "Imported",
-                "DataType": "String",
-                "ExternalName": "SMILES",
-                "IsValid": "True",
-                "Expression": "",
-                "Comparer": "Spotfire.Dxp.Data.Cxx.StringDataComparer",
-                "Formatter": "Spotfire.Dxp.Data.Formatters.StringFormatter",
-                "Origin": "multi_linkers",
-                "Description": ""
-            },
-            "values": [
-                "c1cc(C)ccc1C(=O)Nc1ccccc1",
-                "Brc1cccc(Nc2ncnc3ccncc23)c1NCCN1CCOCC1",
-                "c1ncccc1CC(=O)OCc1ccc(cc1)OC(=O)Oc1c[nH]c(c1)C(=S)c1cocc1"
-            ]
-        },
-        "87559b96-5a73-4666-b570-409deb2ba74csName": {
-            "dataType": "string",
-            "name": "Name",
-            "contentType": null,
-            "properties": {
-                "Name": "Name",
-                "ColumnType": "Imported",
-                "DataType": "String",
-                "ExternalName": "Name",
-                "IsValid": "True",
-                "Expression": "",
-                "Comparer": "Spotfire.Dxp.Data.Cxx.StringDataComparer",
-                "Formatter": "Spotfire.Dxp.Data.Formatters.StringFormatter",
-                "Origin": "multi_linkers",
-                "Description": ""
-            },
-            "values": [
-                "Mol1",
-                "Mol2",
-                "Mol3"
-            ]
-        }
+    "idColumn": {
+      "id": "idColumn",
+      "dataType": "string",
+      "contentType": null,
+      "selectorType": "column",
+      "data": "87559b96-5a73-4666-b570-409deb2ba74csName"
     },
-    "webServiceRequest": null,
-    "requestId": -1,
-    "tkid": null,
-    "script": null,
-    "updateBehavior": "automatic",
-    "allowedClients": [
-        "Analyst",
-        "WebPlayer"
-    ],
-    "limitBy": "none",
-    "runtimeLimitBy": "none",
-    "runtimeLimitByMarking": null,
-    "ironPython": null,
-    "chartsFxnType": null,
-    "chartsRequest": null
+    "plusDeltaBonds": {
+      "id": "plusDeltaBonds",
+      "dataType": "integer",
+      "contentType": null,
+      "selectorType": null,
+      "data": -1
+    },
+    "minusDeltaBonds": {
+      "id": "minusDeltaBonds",
+      "dataType": "integer",
+      "contentType": null,
+      "selectorType": null,
+      "data": -1
+    },
+    "matchHbonds": {
+      "id": "matchHbonds",
+      "dataType": "boolean",
+      "contentType": null,
+      "selectorType": null,
+      "data": false
+    },
+    "noRingLinkers": {
+      "id": "noRingLinkers",
+      "dataType": "boolean",
+      "contentType": null,
+      "selectorType": null,
+      "data": false
+    },
+    "maxMolsPerInput": {
+      "id": "maxMolsPerInput",
+      "dataType": "integer",
+      "contentType": null,
+      "selectorType": null,
+      "data": 100000
+    },
+    "totalOutputMols": {
+      "id": "totalOutputMols",
+      "dataType": "integer",
+      "contentType": null,
+      "selectorType": null,
+      "data": 500000
+    }
+  },
+  "maximumOutputColumns": 1,
+  "maximumOutputTables": 1,
+  "resultTables": null,
+  "serviceUri": "glysade.python",
+  "inputColumns": {
+    "87559b96-5a73-4666-b570-409deb2ba74csSMILES": {
+      "dataType": "string",
+      "name": "SMILES",
+      "contentType": "chemical/x-daylight-smiles",
+      "properties": {
+        "Name": "SMILES",
+        "ColumnType": "Imported",
+        "DataType": "String",
+        "ExternalName": "SMILES",
+        "IsValid": "True",
+        "Expression": "",
+        "Comparer": "Spotfire.Dxp.Data.Cxx.StringDataComparer",
+        "Formatter": "Spotfire.Dxp.Data.Formatters.StringFormatter",
+        "Origin": "multi_linkers",
+        "Description": ""
+      },
+      "values": [
+        "c1cc(C)ccc1C(=O)Nc1ccccc1",
+        "Brc1cccc(Nc2ncnc3ccncc23)c1NCCN1CCOCC1",
+        "c1ncccc1CC(=O)OCc1ccc(cc1)OC(=O)Oc1c[nH]c(c1)C(=S)c1cocc1"
+      ]
+    },
+    "87559b96-5a73-4666-b570-409deb2ba74csName": {
+      "dataType": "string",
+      "name": "Name",
+      "contentType": null,
+      "properties": {
+        "Name": "Name",
+        "ColumnType": "Imported",
+        "DataType": "String",
+        "ExternalName": "Name",
+        "IsValid": "True",
+        "Expression": "",
+        "Comparer": "Spotfire.Dxp.Data.Cxx.StringDataComparer",
+        "Formatter": "Spotfire.Dxp.Data.Formatters.StringFormatter",
+        "Origin": "multi_linkers",
+        "Description": ""
+      },
+      "values": [
+        "Mol1",
+        "Mol2",
+        "Mol3"
+      ]
+    }
+  },
+  "webServiceRequest": null,
+  "requestId": -1,
+  "tkid": null,
+  "script": null,
+  "updateBehavior": "automatic",
+  "allowedClients": [
+    "Analyst",
+    "WebPlayer"
+  ],
+  "limitBy": "none",
+  "runtimeLimitBy": "none",
+  "runtimeLimitByMarking": null,
+  "ironPython": null,
+  "chartsFxnType": null,
+  "chartsRequest": null
 }
